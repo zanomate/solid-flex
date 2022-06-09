@@ -28,7 +28,7 @@ for [Solid JS](https://www.solidjs.com/).
 </Flex>
 ```
 
-[**Live Example**](https://codesandbox.io/s/basic-ykvbdf;
+[**Live Example**](https://codesandbox.io/s/basic-ykvbdf);
 
 ## Tl;dr
 
