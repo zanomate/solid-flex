@@ -9,17 +9,17 @@
     "type": "git",
     "url": "git+https://github.com/solid-libs/solid-bootstrap.git#master"
   },
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/cjs/solid-flex.js",
+  "module": "dist/esm/solid-flex.js",
+  "types": "dist/types/solid-flex.d.ts",
   "files": ["dist"],
   "exports": {
     ".": {
-      "solid": "./dist/source/index.jsx",
-      "import": "./dist/esm/index.js",
-      "browser": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "node": "./dist/cjs/index.js"
+      "solid": "./dist/source/solid-flex.jsx",
+      "import": "./dist/esm/solid-flex.js",
+      "browser": "./dist/esm/solid-flex.js",
+      "require": "./dist/cjs/solid-flex.js",
+      "node": "./dist/cjs/solid-flex.js"
     }
   },
   "scripts": {
