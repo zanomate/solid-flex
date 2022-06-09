@@ -15,10 +15,6 @@ export const gapProperties = (rowGap, columnGap, colGap, gap, defaultPropertiesV
     props.rowGap = rowGapProperty(rowGap, undefined);
     props.columnGap = columnGapProperty(columnGap, colGap, undefined);
     if (gap) {
-        if (Array.isArray(gap)) {
-            props.rowGap = gap[0];
-            props.columnGap = gap[1];
-        }
         props.gap = gap;
     }
     return props;

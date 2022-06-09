@@ -57,7 +57,7 @@ export interface FlexibleContainerProps {
   contentSpaceBetween?: boolean;
   contentSpaceAround?: boolean;
   // gap
-  gap?: CssGap | CssGap[];
+  gap?: CssGap;
   // row-gap
   rowGap?: CssRowGap;
   // column-gap
