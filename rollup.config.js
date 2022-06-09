@@ -1,6 +1,9 @@
 import withSolid from "rollup-preset-solid"
 
-export default withSolid()
+export default withSolid({
+  input: "src/index.ts",
+  targets: ["esm", "cjs"],
+})
 
 // import babel from '@rollup/plugin-babel';
 // import nodeResolve from "@rollup/plugin-node-resolve";

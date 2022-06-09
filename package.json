@@ -1,6 +1,5 @@
 {
   "name": "solid-flex",
-  "source": "src/index.ts",
   "version": "0.0.1",
   "description": "flex elements for solid js",
   "author": "Matteo Zanoncello",
@@ -24,11 +23,9 @@
     }
   },
   "scripts": {
-    "bundle:pre": "rimraf dist",
-    "bundle:module": "webpack --mode production",
-    "bundle:types": "rollup -c",
-    "bundle:post": "rimraf src/**/*.map src/**/*.d.ts src/**/*.js src/**/*.jsx",
-    "bundle": "npm run bundle:pre && npm run bundle:types"
+    "clean": "rimraf dist",
+    "rollup": "rollup -c",
+    "bundle": "npm run clean && npm run rollup"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
