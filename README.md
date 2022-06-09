@@ -2,7 +2,7 @@
 
 [![npm (scoped)](https://img.shields.io/npm/v/solid-flex?style=flat-square)](https://www.npmjs.com/package/solid-flex)
 [![npm type definitions](https://img.shields.io/npm/types/solid-flex)](https://www.npmjs.com/package/typescript)
-[![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/solid-flex/peer/solidjs)](https://www.npmjs.com/package/solidjs)
+[![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/solid-flex/peer/solid-js)](https://www.npmjs.com/package/solid-js)
 
 [Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) elements
 for [Solid JS](https://www.solidjs.com/).
