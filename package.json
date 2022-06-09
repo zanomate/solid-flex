@@ -1,0 +1,45 @@
+{
+  "name": "solid-flex",
+  "source": "src/index.ts",
+  "version": "0.0.1",
+  "description": "flex elements for solid js",
+  "author": "Matteo Zanoncello",
+  "license": "ISC",
+  "homepage": "https://github.com/zanomate/solid-flex.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solid-libs/solid-bootstrap.git#master"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "solid": "./dist/source/index.jsx",
+      "import": "./dist/esm/index.js",
+      "browser": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "node": "./dist/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "bundle:pre": "rimraf dist",
+    "bundle:module": "webpack --mode production",
+    "bundle:types": "rollup -c",
+    "bundle:post": "rimraf src/**/*.map src/**/*.d.ts src/**/*.js src/**/*.jsx",
+    "bundle": "npm run bundle:pre && npm run bundle:types"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "rollup": "^2.75.6",
+    "solid-js": ">=1.2.5",
+    "typescript": "^4.6.4"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.2.5"
+  },
+  "dependencies": {
+    "rollup-preset-solid": "^1.4.0"
+  }
+}

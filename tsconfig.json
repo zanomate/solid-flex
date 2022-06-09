@@ -1,0 +1,52 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "declarationDir": "./types",
+    "emitDeclarationOnly": true,
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsxImportSource": "solid-js"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*"]
+}
+//{
+//  "compilerOptions": {
+//    "pretty": true,
+//    "target": "es6",
+//    "module": "esnext",
+//    "allowSyntheticDefaultImports": true,
+//    "preserveConstEnums": true,
+//    "sourceMap": true,
+//    "moduleResolution": "node",
+//    "lib": [
+//      "es2015",
+//      "dom"
+//    ],
+//    "types": [
+//      "solid-js",
+//      "solid-js/web"
+//    ],
+//    "jsx": "preserve",
+//    "jsxImportSource": "solid-js",
+//    "noUnusedLocals": true,
+//    "baseUrl": "./src",
+//    "noEmit": true,
+//    "skipLibCheck": true,
+//    "noUnusedParameters": true,
+//    "noImplicitReturns": true,
+//    "noFallthroughCasesInSwitch": true,
+//    "importHelpers": false,
+//    "esModuleInterop": true
+//  },
+//  "include": [
+//    "src"
+//  ]
+//}
