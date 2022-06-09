@@ -1,7 +1,11 @@
+import { cssPropertyFactory } from '../helpers/cssProperty';
 export const flexBasisProperty = (flexBasis, basis, defaultValue) => {
+    const cssProp = cssPropertyFactory('flex-basis');
     if (flexBasis !== undefined)
-        return flexBasis;
+        return cssProp(flexBasis);
     if (basis !== undefined)
-        return basis;
-    return defaultValue;
+        return cssProp(basis);
+    if (defaultValue !== undefined)
+        return cssProp(defaultValue);
+    return {};
 };

@@ -10,7 +10,7 @@ export const alignContentProperty = (
   contentStretch: boolean | undefined,
   contentSpaceBetween: boolean | undefined,
   contentSpaceAround: boolean | undefined,
-  defaultValue: CssAlignContent,
+  defaultValue?: CssAlignContent,
 ): JSX.CSSProperties => {
   const cssProp = cssPropertyFactory('align-content')
 

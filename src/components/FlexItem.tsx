@@ -1,4 +1,4 @@
-import { children, JSX, ParentComponent, splitProps } from 'solid-js'
+import { JSX, ParentComponent, splitProps } from 'solid-js'
 import { alignSelfProperty } from '../properties/alignSelfProperty'
 import { flexBasisProperty } from '../properties/flexBasisProperty'
 import { flexGrowProperty } from '../properties/flexGrowProperty'
@@ -10,7 +10,7 @@ import { As, WithAsProps } from './As'
 export interface FlexItemProps extends WithAsProps, FlexibleItemProps {
 }
 
-export const FlexItem: ParentComponent<FlexItemProps> = function (props) {
+export const FlexItem: ParentComponent<FlexItemProps> = (props) => {
   const [localProps, otherProps] = splitProps(props, [
     'children',
     'order',
@@ -29,15 +29,20 @@ export const FlexItem: ParentComponent<FlexItemProps> = function (props) {
     'selfBaseline',
   ])
 
-  const injectedStyle: JSX.CSSProperties = {
-    'order': orderProperty(localProps.order, 'unset'),
-    'flex-grow': flexGrowProperty(localProps.flexGrow, localProps.grow, 'unset'),
-    'flex-shrink': flexShrinkProperty(localProps.flexShrink, localProps.shrink, 'unset'),
-    'flex-basis': flexBasisProperty(localProps.flexBasis, localProps.basis, 'unset'),
-    'align-self': alignSelfProperty(localProps.alignSelf, localProps.self, localProps.selfStart, localProps.selfEnd, localProps.selfCenter, localProps.selfStretch, localProps.selfBaseline, 'unset'),
-  }
+  const injectedStyle = (): JSX.CSSProperties => ({
+    ...orderProperty(localProps.order),
+    ...flexGrowProperty(localProps.flexGrow, localProps.grow),
+    ...flexShrinkProperty(localProps.flexShrink, localProps.shrink),
+    ...flexBasisProperty(localProps.flexBasis, localProps.basis),
+    ...alignSelfProperty(localProps.alignSelf, localProps.self, localProps.selfStart, localProps.selfEnd, localProps.selfCenter, localProps.selfStretch, localProps.selfBaseline),
+  })
 
-  const c = children(() => props.children)
-
-  return <As {...otherProps} injectedStyle={injectedStyle}>{c()}</As>
+  return (
+    <As
+      injectedStyle={injectedStyle()}
+      {...otherProps}
+    >
+      {localProps.children}
+    </As>
+  )
 }

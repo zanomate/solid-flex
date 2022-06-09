@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal, JSX, ParentComponent, splitProps } from 'solid-js'
+import { JSX, ParentComponent, splitProps } from 'solid-js'
 import { alignContentProperty } from '../properties/alignContentProperty'
 import { alignItemsProperty } from '../properties/alignItemsProperty'
 import { alignSelfProperty } from '../properties/alignSelfProperty'
@@ -18,7 +18,7 @@ import { As, WithAsProps } from './As'
 export interface FlexProps extends WithAsProps, FlexibleContainerProps, FlexibleItemProps {
 }
 
-export const Flex: ParentComponent<FlexProps> = function(props) {
+export const Flex: ParentComponent<FlexProps> = function (props) {
   const [localProps, otherProps] = splitProps(props, [
     'display',
     'inline',
@@ -79,75 +79,20 @@ export const Flex: ParentComponent<FlexProps> = function(props) {
     'colGap',
   ])
 
-  const [foo] = createSignal(0)
-  createEffect(() => {
-    console.log(localProps, foo())
+  const injectedStyle = (): JSX.CSSProperties => ({
+    ...displayProperty(localProps.display, localProps.inline, 'flex'),
+    ...flexDirectionProperty(localProps.flexDirection, localProps.direction, localProps.row, localProps.col, localProps.column, localProps.rowReverse, localProps.colReverse, localProps.columnReverse, localProps.reverse),
+    ...flexWrapProperty(localProps.flexWrap, localProps.wrap, localProps.nowrap, localProps.wrapReverse),
+    ...justifyContentProperty(localProps.justifyContent, localProps.justify, localProps.start, localProps.end, localProps.center, localProps.spaceBetween, localProps.spaceAround, localProps.spaceEvenly),
+    ...alignItemsProperty(localProps.alignItems, localProps.align, localProps.alignStart, localProps.alignEnd, localProps.alignCenter, localProps.stretch, localProps.alignStretch, localProps.baseline, localProps.alignBaseline, 'center'),
+    ...alignContentProperty(localProps.alignContent, localProps.contentStart, localProps.contentEnd, localProps.contentCenter, localProps.contentStretch, localProps.contentSpaceBetween, localProps.contentSpaceAround),
+    ...gapProperties(localProps.rowGap, localProps.columnGap, localProps.colGap, localProps.gap, {}),
+    ...orderProperty(localProps.order),
+    ...flexGrowProperty(localProps.flexGrow, localProps.grow),
+    ...flexShrinkProperty(localProps.flexShrink, localProps.shrink),
+    ...flexBasisProperty(localProps.flexBasis, localProps.basis),
+    ...alignSelfProperty(localProps.alignSelf, localProps.self, localProps.selfStart, localProps.selfEnd, localProps.selfCenter, localProps.selfStretch, localProps.selfBaseline),
   })
 
-  const injectedStyle: JSX.CSSProperties = createMemo(() => ({
-    display: displayProperty(localProps.display, localProps.inline, 'flex'),
-    flexDirection: flexDirectionProperty(
-      localProps.flexDirection,
-      localProps.direction,
-      localProps.row,
-      localProps.col,
-      localProps.column,
-      localProps.rowReverse,
-      localProps.colReverse,
-      localProps.columnReverse,
-      localProps.reverse,
-      'unset',
-    ),
-    flexWrap: flexWrapProperty(localProps.flexWrap, localProps.wrap, localProps.nowrap, localProps.wrapReverse, 'unset'),
-    justifyContent: justifyContentProperty(
-      localProps.justifyContent,
-      localProps.justify,
-      localProps.start,
-      localProps.end,
-      localProps.center,
-      localProps.spaceBetween,
-      localProps.spaceAround,
-      localProps.spaceEvenly,
-      'unset',
-    ),
-    alignItems: alignItemsProperty(
-      localProps.alignItems,
-      localProps.align,
-      localProps.alignStart,
-      localProps.alignEnd,
-      localProps.alignCenter,
-      localProps.stretch,
-      localProps.alignStretch,
-      localProps.baseline,
-      localProps.alignBaseline,
-      'center',
-    ),
-    ...alignContentProperty(
-      localProps.alignContent,
-      localProps.contentStart,
-      localProps.contentEnd,
-      localProps.contentCenter,
-      localProps.contentStretch,
-      localProps.contentSpaceBetween,
-      localProps.contentSpaceAround,
-      'unset',
-    ),
-    ...gapProperties(localProps.rowGap, localProps.columnGap, localProps.colGap, localProps.gap, {}),
-    order: orderProperty(localProps.order, 'unset'),
-    flexGrow: flexGrowProperty(localProps.flexGrow, localProps.grow, 'unset'),
-    flexShrink: flexShrinkProperty(localProps.flexShrink, localProps.shrink, 'unset'),
-    flexBasis: flexBasisProperty(localProps.flexBasis, localProps.basis, 'unset'),
-    alignSelf: alignSelfProperty(
-      localProps.alignSelf,
-      localProps.self,
-      localProps.selfStart,
-      localProps.selfEnd,
-      localProps.selfCenter,
-      localProps.selfStretch,
-      localProps.selfBaseline,
-      'unset',
-    ),
-  }))
-
-  return <As {...otherProps} injectedStyle={injectedStyle} />
+  return <As {...otherProps} injectedStyle={injectedStyle()} />
 }

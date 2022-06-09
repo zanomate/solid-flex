@@ -1,17 +1,21 @@
+import { cssPropertyFactory } from '../helpers/cssProperty';
 export const alignSelfProperty = (alignSelf, self, selfStart, selfEnd, selfCenter, selfStretch, selfBaseline, defaultValue) => {
+    const cssProp = cssPropertyFactory('align-self');
     if (alignSelf)
-        return alignSelf;
+        return cssProp(alignSelf);
     if (self)
-        return self;
+        return cssProp(self);
     if (selfStart)
-        return "flex-start";
+        return cssProp('flex-start');
     if (selfEnd)
-        return "flex-end";
+        return cssProp('flex-end');
     if (selfCenter)
-        return "center";
+        return cssProp('center');
     if (selfStretch)
-        return "stretch";
+        return cssProp('stretch');
     if (selfBaseline)
-        return "baseline";
-    return defaultValue;
+        return cssProp('baseline');
+    if (defaultValue !== undefined)
+        return cssProp(defaultValue);
+    return {};
 };

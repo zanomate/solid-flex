@@ -1,4 +1,6 @@
-import { CssFlexDirection } from "../types/FlexibleContainerProps";
+import { JSX } from 'solid-js'
+import { cssPropertyFactory } from '../helpers/cssProperty'
+import { CssFlexDirection } from '../types/FlexibleContainerProps'
 
 export const flexDirectionProperty = (
   flexDirection: CssFlexDirection | undefined,
@@ -10,15 +12,17 @@ export const flexDirectionProperty = (
   colReverse: boolean | undefined,
   columnReverse: boolean | undefined,
   reverse: boolean | undefined,
-  defaultValue: CssFlexDirection
-): CssFlexDirection => {
-  if (flexDirection) return flexDirection;
-  if (direction) return direction;
-  if (row) return reverse ? "row-reverse" : "row";
-  if (col) return reverse ? "column-reverse" : "column";
-  if (column) return reverse ? "column-reverse" : "column";
-  if (rowReverse) return reverse ? "row" : "row-reverse";
-  if (colReverse) return reverse ? "column" : "column-reverse";
-  if (columnReverse) return reverse ? "column" : "column-reverse";
-  return defaultValue;
-};
+  defaultValue?: CssFlexDirection,
+): JSX.CSSProperties => {
+  const cssProp = cssPropertyFactory('flex-direction')
+  if (flexDirection) return cssProp(flexDirection)
+  if (direction) return cssProp(direction)
+  if (row) return cssProp(reverse ? 'row-reverse' : 'row')
+  if (col) return cssProp(reverse ? 'column-reverse' : 'column')
+  if (column) return cssProp(reverse ? 'column-reverse' : 'column')
+  if (rowReverse) return cssProp(reverse ? 'row' : 'row-reverse')
+  if (colReverse) return cssProp(reverse ? 'column' : 'column-reverse')
+  if (columnReverse) return cssProp(reverse ? 'column' : 'column-reverse')
+  if (defaultValue !== undefined) return cssProp(defaultValue)
+  return {}
+}

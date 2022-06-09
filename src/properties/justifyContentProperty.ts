@@ -1,4 +1,6 @@
-import { CssJustifyContent } from "../types/FlexibleContainerProps";
+import { JSX } from 'solid-js'
+import { cssPropertyFactory } from '../helpers/cssProperty'
+import { CssJustifyContent } from '../types/FlexibleContainerProps'
 
 export const justifyContentProperty = (
   justifyContent: CssJustifyContent | undefined,
@@ -9,15 +11,18 @@ export const justifyContentProperty = (
   spaceBetween: boolean | undefined,
   spaceAround: boolean | undefined,
   spaceEvenly: boolean | undefined,
-  defaultValue: CssJustifyContent
-): CssJustifyContent => {
-  if (justifyContent) return justifyContent;
-  if (justify) return justify;
-  if (start) return "flex-start";
-  if (end) return "flex-end";
-  if (center) return "center";
-  if (spaceBetween) return "space-between";
-  if (spaceAround) return "space-around";
-  if (spaceEvenly) return "space-evenly";
-  return defaultValue;
-};
+  defaultValue?: CssJustifyContent,
+): JSX.CSSProperties => {
+  const cssProp = cssPropertyFactory('justify-content')
+
+  if (justifyContent) return cssProp(justifyContent)
+  if (justify) return cssProp(justify)
+  if (start) return cssProp('flex-start')
+  if (end) return cssProp('flex-end')
+  if (center) return cssProp('center')
+  if (spaceBetween) return cssProp('space-between')
+  if (spaceAround) return cssProp('space-around')
+  if (spaceEvenly) return cssProp('space-evenly')
+  if (defaultValue !== undefined) return cssProp(defaultValue)
+  return {}
+}

@@ -1,7 +1,11 @@
+import { cssPropertyFactory } from '../helpers/cssProperty';
 export const displayProperty = (display, inline, defaultValue) => {
+    const cssProp = cssPropertyFactory('display');
     if (display)
-        return display;
+        return cssProp(display);
     if (inline)
-        return "inline-flex";
-    return defaultValue;
+        return cssProp('inline-flex');
+    if (defaultValue !== undefined)
+        return cssProp(defaultValue);
+    return {};
 };

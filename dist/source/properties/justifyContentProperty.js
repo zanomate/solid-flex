@@ -1,19 +1,23 @@
+import { cssPropertyFactory } from '../helpers/cssProperty';
 export const justifyContentProperty = (justifyContent, justify, start, end, center, spaceBetween, spaceAround, spaceEvenly, defaultValue) => {
+    const cssProp = cssPropertyFactory('justify-content');
     if (justifyContent)
-        return justifyContent;
+        return cssProp(justifyContent);
     if (justify)
-        return justify;
+        return cssProp(justify);
     if (start)
-        return "flex-start";
+        return cssProp('flex-start');
     if (end)
-        return "flex-end";
+        return cssProp('flex-end');
     if (center)
-        return "center";
+        return cssProp('center');
     if (spaceBetween)
-        return "space-between";
+        return cssProp('space-between');
     if (spaceAround)
-        return "space-around";
+        return cssProp('space-around');
     if (spaceEvenly)
-        return "space-evenly";
-    return defaultValue;
+        return cssProp('space-evenly');
+    if (defaultValue !== undefined)
+        return cssProp(defaultValue);
+    return {};
 };

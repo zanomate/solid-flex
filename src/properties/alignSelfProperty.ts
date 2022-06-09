@@ -1,4 +1,6 @@
-import { CssAlignSelf } from "../types/FlexibleItemProps";
+import { JSX } from 'solid-js'
+import { cssPropertyFactory } from '../helpers/cssProperty'
+import { CssAlignSelf } from '../types/FlexibleItemProps'
 
 export const alignSelfProperty = (
   alignSelf: CssAlignSelf | undefined,
@@ -8,14 +10,16 @@ export const alignSelfProperty = (
   selfCenter: boolean | undefined,
   selfStretch: boolean | undefined,
   selfBaseline: boolean | undefined,
-  defaultValue: CssAlignSelf
-): CssAlignSelf => {
-  if (alignSelf) return alignSelf;
-  if (self) return self;
-  if (selfStart) return "flex-start";
-  if (selfEnd) return "flex-end";
-  if (selfCenter) return "center";
-  if (selfStretch) return "stretch";
-  if (selfBaseline) return "baseline";
-  return defaultValue;
-};
+  defaultValue?: CssAlignSelf,
+): JSX.CSSProperties => {
+  const cssProp = cssPropertyFactory('align-self')
+  if (alignSelf) return cssProp(alignSelf)
+  if (self) return cssProp(self)
+  if (selfStart) return cssProp('flex-start')
+  if (selfEnd) return cssProp('flex-end')
+  if (selfCenter) return cssProp('center')
+  if (selfStretch) return cssProp('stretch')
+  if (selfBaseline) return cssProp('baseline')
+  if (defaultValue !== undefined) return cssProp(defaultValue)
+  return {}
+}

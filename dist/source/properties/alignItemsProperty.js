@@ -1,21 +1,25 @@
+import { cssPropertyFactory } from '../helpers/cssProperty';
 export const alignItemsProperty = (alignItems, align, alignStart, alignEnd, alignCenter, stretch, alignStretch, baseline, alignBaseline, defaultValue) => {
+    const cssProp = cssPropertyFactory('align-items');
     if (alignItems)
-        return alignItems;
+        return cssProp(alignItems);
     if (align)
-        return align;
+        return cssProp(align);
     if (alignStart)
-        return "flex-start";
+        return cssProp('flex-start');
     if (alignEnd)
-        return "flex-end";
+        return cssProp('flex-end');
     if (alignCenter)
-        return "center";
+        return cssProp('center');
     if (stretch)
-        return "stretch";
+        return cssProp('stretch');
     if (alignStretch)
-        return "stretch";
+        return cssProp('stretch');
     if (baseline)
-        return "baseline";
+        return cssProp('baseline');
     if (alignBaseline)
-        return "baseline";
-    return defaultValue;
+        return cssProp('baseline');
+    if (defaultValue !== undefined)
+        return cssProp(defaultValue);
+    return {};
 };

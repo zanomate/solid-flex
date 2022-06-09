@@ -1,4 +1,4 @@
-import { children, Component, JSX, mergeProps, ParentComponent, splitProps } from 'solid-js'
+import { Component, JSX, mergeProps, ParentComponent, splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 
 export interface WithStyleProps {
@@ -7,16 +7,16 @@ export interface WithStyleProps {
   [key: string]: any
 }
 
-export interface WithAsProps {
+export interface WithAsProps extends WithStyleProps {
   as?: Component<WithStyleProps> | string | keyof JSX.IntrinsicElements;
 }
 
-export interface AsProps extends WithAsProps, WithStyleProps {
+export interface AsProps extends WithAsProps {
   injectedStyle: JSX.CSSProperties;
 }
 
-export const As: ParentComponent<AsProps> = function (props) {
-  const propsWithDefault = mergeProps(props, { as: 'div' })
+export const As: ParentComponent<AsProps> = (props) => {
+  const propsWithDefault = mergeProps({ as: 'div' }, props)
   const [localProps, otherProps] = splitProps(propsWithDefault, [
     'children',
     'as',
@@ -24,14 +24,20 @@ export const As: ParentComponent<AsProps> = function (props) {
     'style',
   ])
 
-  const style = {
+  const style = () => ({
     // @ts-ignore
     ...localProps?.style,
     ...localProps.injectedStyle,
-  }
-
-  const c = children(() => localProps.children)
+  })
 
   // @ts-ignore
-  return <Dynamic component={localProps.as} style={style} {...otherProps}>{c()}</Dynamic>
+  return (
+    <Dynamic
+      component={localProps.as}
+      style={style()}
+      {...otherProps}
+    >
+      {localProps.children}
+    </Dynamic>
+  )
 }

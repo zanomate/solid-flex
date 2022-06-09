@@ -1,4 +1,6 @@
-import { CssAlignItems } from "../types/FlexibleContainerProps";
+import { JSX } from 'solid-js'
+import { cssPropertyFactory } from '../helpers/cssProperty'
+import { CssAlignItems } from '../types/FlexibleContainerProps'
 
 export const alignItemsProperty = (
   alignItems: CssAlignItems | undefined,
@@ -10,16 +12,19 @@ export const alignItemsProperty = (
   alignStretch: boolean | undefined,
   baseline: boolean | undefined,
   alignBaseline: boolean | undefined,
-  defaultValue: CssAlignItems
-): CssAlignItems => {
-  if (alignItems) return alignItems;
-  if (align) return align;
-  if (alignStart) return "flex-start";
-  if (alignEnd) return "flex-end";
-  if (alignCenter) return "center";
-  if (stretch) return "stretch";
-  if (alignStretch) return "stretch";
-  if (baseline) return "baseline";
-  if (alignBaseline) return "baseline";
-  return defaultValue;
-};
+  defaultValue?: CssAlignItems,
+): JSX.CSSProperties => {
+  const cssProp = cssPropertyFactory('align-items')
+
+  if (alignItems) return cssProp(alignItems)
+  if (align) return cssProp(align)
+  if (alignStart) return cssProp('flex-start')
+  if (alignEnd) return cssProp('flex-end')
+  if (alignCenter) return cssProp('center')
+  if (stretch) return cssProp('stretch')
+  if (alignStretch) return cssProp('stretch')
+  if (baseline) return cssProp('baseline')
+  if (alignBaseline) return cssProp('baseline')
+  if (defaultValue !== undefined) return cssProp(defaultValue)
+  return {}
+}

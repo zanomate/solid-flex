@@ -1,19 +1,23 @@
+import { cssPropertyFactory } from '../helpers/cssProperty';
 export const flexDirectionProperty = (flexDirection, direction, row, col, column, rowReverse, colReverse, columnReverse, reverse, defaultValue) => {
+    const cssProp = cssPropertyFactory('flex-direction');
     if (flexDirection)
-        return flexDirection;
+        return cssProp(flexDirection);
     if (direction)
-        return direction;
+        return cssProp(direction);
     if (row)
-        return reverse ? "row-reverse" : "row";
+        return cssProp(reverse ? 'row-reverse' : 'row');
     if (col)
-        return reverse ? "column-reverse" : "column";
+        return cssProp(reverse ? 'column-reverse' : 'column');
     if (column)
-        return reverse ? "column-reverse" : "column";
+        return cssProp(reverse ? 'column-reverse' : 'column');
     if (rowReverse)
-        return reverse ? "row" : "row-reverse";
+        return cssProp(reverse ? 'row' : 'row-reverse');
     if (colReverse)
-        return reverse ? "column" : "column-reverse";
+        return cssProp(reverse ? 'column' : 'column-reverse');
     if (columnReverse)
-        return reverse ? "column" : "column-reverse";
-    return defaultValue;
+        return cssProp(reverse ? 'column' : 'column-reverse');
+    if (defaultValue !== undefined)
+        return cssProp(defaultValue);
+    return {};
 };
