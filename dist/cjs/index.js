@@ -1,18 +1,22 @@
-import { createComponent, Dynamic, mergeProps as mergeProps$1, template } from 'solid-js/web';
-import { mergeProps, splitProps, children, createSignal, createEffect, createMemo } from 'solid-js';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var web = require('solid-js/web');
+var solidJs = require('solid-js');
 
 const As = function (props) {
-  const propsWithDefault = mergeProps(props, {
+  const propsWithDefault = solidJs.mergeProps(props, {
     as: 'div'
   });
-  const [localProps, otherProps] = splitProps(propsWithDefault, ['children', 'as', 'injectedStyle', 'style']);
+  const [localProps, otherProps] = solidJs.splitProps(propsWithDefault, ['children', 'as', 'injectedStyle', 'style']);
   const style = { // @ts-ignore
     ...(localProps === null || localProps === void 0 ? void 0 : localProps.style),
     ...localProps.injectedStyle
   };
-  const c = children(() => localProps.children); // @ts-ignore
+  const c = solidJs.children(() => localProps.children); // @ts-ignore
 
-  return createComponent(Dynamic, mergeProps$1({
+  return web.createComponent(web.Dynamic, web.mergeProps({
     get component() {
       return localProps.as;
     },
@@ -170,12 +174,12 @@ const orderProperty = (order, defaultValue) => {
 };
 
 const Flex = function (props) {
-  const [localProps, otherProps] = splitProps(props, ['display', 'inline', 'flexDirection', 'direction', 'row', 'col', 'column', 'rowReverse', 'colReverse', 'columnReverse', 'reverse', 'flexWrap', 'wrap', 'nowrap', 'wrapReverse', 'justifyContent', 'justify', 'start', 'end', 'center', 'spaceBetween', 'spaceAround', 'spaceEvenly', 'alignItems', 'align', 'alignStart', 'alignEnd', 'alignCenter', 'stretch', 'alignStretch', 'baseline', 'alignBaseline', 'alignContent', 'contentStart', 'contentEnd', 'contentCenter', 'contentStretch', 'contentSpaceBetween', 'contentSpaceAround', 'order', 'flexGrow', 'grow', 'flexShrink', 'shrink', 'flexBasis', 'basis', 'alignSelf', 'self', 'selfStart', 'selfEnd', 'selfCenter', 'selfStretch', 'selfBaseline', 'gap', 'rowGap', 'columnGap', 'colGap']);
-  const [foo] = createSignal(0);
-  createEffect(() => {
+  const [localProps, otherProps] = solidJs.splitProps(props, ['display', 'inline', 'flexDirection', 'direction', 'row', 'col', 'column', 'rowReverse', 'colReverse', 'columnReverse', 'reverse', 'flexWrap', 'wrap', 'nowrap', 'wrapReverse', 'justifyContent', 'justify', 'start', 'end', 'center', 'spaceBetween', 'spaceAround', 'spaceEvenly', 'alignItems', 'align', 'alignStart', 'alignEnd', 'alignCenter', 'stretch', 'alignStretch', 'baseline', 'alignBaseline', 'alignContent', 'contentStart', 'contentEnd', 'contentCenter', 'contentStretch', 'contentSpaceBetween', 'contentSpaceAround', 'order', 'flexGrow', 'grow', 'flexShrink', 'shrink', 'flexBasis', 'basis', 'alignSelf', 'self', 'selfStart', 'selfEnd', 'selfCenter', 'selfStretch', 'selfBaseline', 'gap', 'rowGap', 'columnGap', 'colGap']);
+  const [foo] = solidJs.createSignal(0);
+  solidJs.createEffect(() => {
     console.log(localProps, foo());
   });
-  const injectedStyle = createMemo(() => ({
+  const injectedStyle = solidJs.createMemo(() => ({
     display: displayProperty(localProps.display, localProps.inline, 'flex'),
     flexDirection: flexDirectionProperty(localProps.flexDirection, localProps.direction, localProps.row, localProps.col, localProps.column, localProps.rowReverse, localProps.colReverse, localProps.columnReverse, localProps.reverse, 'unset'),
     flexWrap: flexWrapProperty(localProps.flexWrap, localProps.wrap, localProps.nowrap, localProps.wrapReverse, 'unset'),
@@ -189,13 +193,13 @@ const Flex = function (props) {
     flexBasis: flexBasisProperty(localProps.flexBasis, localProps.basis, 'unset'),
     alignSelf: alignSelfProperty(localProps.alignSelf, localProps.self, localProps.selfStart, localProps.selfEnd, localProps.selfCenter, localProps.selfStretch, localProps.selfBaseline, 'unset')
   }));
-  return createComponent(As, mergeProps$1(otherProps, {
+  return web.createComponent(As, web.mergeProps(otherProps, {
     injectedStyle: injectedStyle
   }));
 };
 
 const FlexItem = function (props) {
-  const [localProps, otherProps] = splitProps(props, ['children', 'order', 'flexGrow', 'grow', 'flexShrink', 'shrink', 'flexBasis', 'basis', 'alignSelf', 'self', 'selfStart', 'selfEnd', 'selfCenter', 'selfStretch', 'selfBaseline']);
+  const [localProps, otherProps] = solidJs.splitProps(props, ['children', 'order', 'flexGrow', 'grow', 'flexShrink', 'shrink', 'flexBasis', 'basis', 'alignSelf', 'self', 'selfStart', 'selfEnd', 'selfCenter', 'selfStretch', 'selfBaseline']);
   const injectedStyle = {
     'order': orderProperty(localProps.order, 'unset'),
     'flex-grow': flexGrowProperty(localProps.flexGrow, localProps.grow, 'unset'),
@@ -203,8 +207,8 @@ const FlexItem = function (props) {
     'flex-basis': flexBasisProperty(localProps.flexBasis, localProps.basis, 'unset'),
     'align-self': alignSelfProperty(localProps.alignSelf, localProps.self, localProps.selfStart, localProps.selfEnd, localProps.selfCenter, localProps.selfStretch, localProps.selfBaseline, 'unset')
   };
-  const c = children(() => props.children);
-  return createComponent(As, mergeProps$1(otherProps, {
+  const c = solidJs.children(() => props.children);
+  return web.createComponent(As, web.mergeProps(otherProps, {
     injectedStyle: injectedStyle,
 
     get children() {
@@ -214,11 +218,14 @@ const FlexItem = function (props) {
   }));
 };
 
-const _tmpl$ = /*#__PURE__*/template(`<div>Hello World!</div>`, 2);
+const _tmpl$ = /*#__PURE__*/web.template(`<div>Hello World!</div>`, 2);
 
 const Foo = () => {
   return _tmpl$.cloneNode(true);
 };
 
-export { As, Flex, FlexItem, Foo };
-//# sourceMappingURL=solid-flex.js.map
+exports.As = As;
+exports.Flex = Flex;
+exports.FlexItem = FlexItem;
+exports.Foo = Foo;
+//# sourceMappingURL=index.js.map
